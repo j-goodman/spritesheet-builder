@@ -13,11 +13,14 @@ sprite.imageSources = [
 
 onload = function () {
   var canvas;
+  var ctx;
   var i;
   var images;
   var img;
   var maxHeight = 0;
   var maxWidth = 0;
+  var labelWidth = document.getElementById('image-width');
+  var totalWidth = document.getElementById('total-width');
   canvas = document.getElementById('canvas');
   images = [];
   for (i=0; i<sprite.imageSources.length ; i++) {
@@ -25,9 +28,15 @@ onload = function () {
     img.src = sprite.imageSources[i];
     maxHeight = img.height > maxHeight ? img.height : maxHeight;
     maxWidth = img.width > maxWidth ? img.width : maxWidth;
+    labelWidth.innerText = maxWidth;
     images.push(img);
   }
-  canvas.style.background = '#000';
+  totalWidth.innerText = maxWidth * images.length;
+  canvas.style.background = 'rgb(' + Math.random() * 255 + ', ' + Math.random() * 255 + ', ' + Math.random() * 255 + ')';
   canvas.height = maxHeight;
   canvas.width = maxWidth * images.length;
+  ctx = canvas.getContext('2d');
+  for (i=0 ; i<images.length ; i++) {
+    ctx.drawImage(images[i], maxWidth * i, 0);
+  }
 };
