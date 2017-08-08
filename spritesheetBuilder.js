@@ -17,9 +17,10 @@ onload = function () {
   var i;
   var images;
   var img;
+  var link;
+  var labelWidth = document.getElementById('image-width');
   var maxHeight = 0;
   var maxWidth = 0;
-  var labelWidth = document.getElementById('image-width');
   var totalWidth = document.getElementById('total-width');
   canvas = document.getElementById('canvas');
   images = [];
@@ -28,10 +29,10 @@ onload = function () {
     img.src = sprite.imageSources[i];
     maxHeight = img.height > maxHeight ? img.height : maxHeight;
     maxWidth = img.width > maxWidth ? img.width : maxWidth;
-    labelWidth.innerText = maxWidth;
+    labelWidth.innerText = maxWidth + 'px';
     images.push(img);
   }
-  totalWidth.innerText = maxWidth * images.length;
+  totalWidth.innerText = maxWidth * images.length + 'px';
   canvas.style.background = 'rgb(' + Math.random() * 255 + ', ' + Math.random() * 255 + ', ' + Math.random() * 255 + ')';
   canvas.height = maxHeight;
   canvas.width = maxWidth * images.length;
@@ -39,4 +40,5 @@ onload = function () {
   for (i=0 ; i<images.length ; i++) {
     ctx.drawImage(images[i], maxWidth * i, 0);
   }
+  link = document.getElementById('download-link');
 };
